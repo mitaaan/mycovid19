@@ -1,0 +1,99 @@
+<h2 style="text-align: center; color: rgb(126, 126, 226);margin-top: 20px;">Covid-19 Data</h2>
+<!-- <div *ngIf="isLoading" style="text-align: center;">
+  <app-spinner></app-spinner>
+</div>  -->
+
+<div>
+  <label style="text-align: center; color: rgb(126, 126, 226);">Covid Data:&nbsp; </label>
+  <select (change)="getData($event.target.value)" style="text-align: center; background-color: rgb(126, 126, 226);color:white;">
+      <option *ngFor="let x of covidType" value={{x}}>
+          {{x}}
+      </option>
+  </select>
+</div>
+
+<section id="tabs" class="project-tab">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <nav>
+          <div class="nav nav-tabs " id="nav-tab" role="tablist">
+
+            <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab"
+              aria-controls="nav-home" aria-selected="true">Covid-19 Table</a>
+            <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab"
+              aria-controls="nav-profile" aria-selected="false">Covid-19 Chart</a>
+          </div>
+        </nav>
+        <div class="tab-content" id="nav-tabContent">
+          <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab" style=" height: auto;
+                              max-height: 525px;
+                              overflow-y: auto;
+                              border: 3px solid rgb(126, 126, 226);
+                              border-collapse: collapse;
+                              " *ngIf="showTable">
+            <table class="table table-striped " data-page-length='10'
+            style="width:100%;text-align: center;
+                    border: 3px solid rgb(126, 126, 226);;">
+              <thead>
+                <tr>
+                  <th>SNO.</th>
+                  <th>Total Cases</th>
+                  <th>Active Cases</th>
+                  <th>Deaths</th>
+                  <th>Recovered</th>
+                  <th>Recovered Percent</th>
+                  <th>Recorded Time</th>
+                </tr>
+              </thead>
+
+              <tbody>
+                <tr *ngFor="let x of this.filterData;let i = index">
+                  <td style="color: black;">{{x.sno }}</td>
+                  <td style="color: red;">{{x.totalCases}}</td>
+                  <td style="color: blue;">{{x.activeCases}}</td>
+                  <td style="color: red;">{{x.deaths}}</td>
+                  <td style="color: green;">{{x.recovered}}</td>
+                  <td style="color: green;">{{x.recoveredPercent}}%</td>
+                  <td>{{x.lastUpdatedAtApify |  date:'medium'}}</td>
+                </tr>
+              </tbody>
+
+            </table>
+
+            <div style="text-align: center;">
+              <button type="button" (click)="changePage('previous',this.nRows)" [disabled]="pageNumber==1"
+               style="background-color: cadetblue; color: white;">Previous</button> |
+              <span>Page Number : {{this.pageNumber}}</span>|
+              <span>Number of rows : </span>
+
+              <select [(ngModel)]="this.nRows" (change)="changePage('changeNumberOfRows',this.nRows)"style="background-color: cadetblue; color: white;">
+                <option *ngFor="let y of numberOfRows" [value]="y">{{y}}</option>
+              </select>
+
+              | <button type="button" (click)="changePage('next',this.nRows)"
+                [disabled]="pageNumber==(this.covidData.length/this.nRows)+(this.covidData.length%this.nRows==0?0:1)"
+                style="background-color: cadetblue; color: white;">Next</button>
+            </div><br>
+
+          </div>
+
+
+
+          <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
+            <h2>Lets see Covid 19 Charts:</h2>
+
+            <highcharts-chart *ngIf="!isLoading " [Highcharts]="Highcharts" [options]="linechart"
+              style="width: 100%; height: 400px; display: block;">
+            </highcharts-chart>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</section>
+
+
+
+
