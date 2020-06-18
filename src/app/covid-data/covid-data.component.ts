@@ -15,13 +15,14 @@ import * as moment from "moment";
   styleUrls: ['./covid-data.component.css']
 })
 export class CovidDataComponent implements OnInit {
+  showButtons:boolean=true;
   covidType:any=['Global','India'];
   showTable=true;
   isLoading=true;
   sno:number;
   newCovidData:any;
-  nRows=5;
-  numberOfRows=[5,10,15,30,50,90];
+  nRows=10;
+  numberOfRows=[10,15,30,50,90];
   n:number;
   filterData:any=[];
   pageNumber=1;
@@ -98,6 +99,9 @@ export class CovidDataComponent implements OnInit {
 
   }
 
+  parseInt(value){
+    return parseInt(value)
+  }
 
   changePage(u:string,v:number){
     v = Number(v);
@@ -106,6 +110,9 @@ export class CovidDataComponent implements OnInit {
     this.pageNumber=this.pageNumber+1;
     }else if(u==='previous'){
       this.pageNumber=this.pageNumber-1;
+    }
+    else {
+      this.pageNumber=1;
     }
     let x= v*(this.pageNumber-1);
     for(let j=x; j<v+x; j++){
@@ -135,22 +142,26 @@ export class CovidDataComponent implements OnInit {
           .subscribe((responseData) => {
 
             let series = [
+              {
+                name:"Total Cases",
+                data:[],
+                color:'black'
+              },
 
               {
-                name: "Total Cases",
-                data: [],
+                name:"Active Cases",
+                data:[],
+                color:'blue'
               },
               {
-                name: "Active Cases",
-                data: [],
+                name:"Deaths",
+                data:[],
+                color:'red'
               },
               {
-                name: "Deaths",
-                data: [],
-              },
-              {
-                name: "Recovered",
-                data: [],
+                name:"Recovered",
+                data:[],
+                color:'green'
               }
             ];
 
@@ -205,20 +216,24 @@ export class CovidDataComponent implements OnInit {
             let series = [
               {
                 name:"Total Cases",
-                data:[]
+                data:[],
+                color:'black'
               },
 
               {
                 name:"Active Cases",
-                data:[]
+                data:[],
+                color:'blue'
               },
               {
                 name:"Deaths",
-                data:[]
+                data:[],
+                color:'red'
               },
               {
                 name:"Recovered",
-                data:[]
+                data:[],
+                color:'green'
               }
             ]
 
@@ -266,6 +281,9 @@ export class CovidDataComponent implements OnInit {
 
         }
 
+      }
+      showButtonsFunction(){
+        this.showButtons=true;
       }
     }
 

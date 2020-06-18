@@ -20,21 +20,23 @@
           <div class="nav nav-tabs " id="nav-tab" role="tablist">
 
             <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab"
-              aria-controls="nav-home" aria-selected="true">Covid-19 Table</a>
+              aria-controls="nav-home" aria-selected="true" style="color: rgb(126, 126, 226);">Covid-19 Table</a>
             <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab"
-              aria-controls="nav-profile" aria-selected="false">Covid-19 Chart</a>
+              aria-controls="nav-profile" aria-selected="false" style="color: rgb(126, 126, 226);"
+              >Covid-19 Chart</a>
           </div>
         </nav>
         <div class="tab-content" id="nav-tabContent">
-          <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab" style=" height: auto;
-                              max-height: 525px;
-                              overflow-y: auto;
-                              border: 3px solid rgb(126, 126, 226);
-                              border-collapse: collapse;
-                              " *ngIf="showTable">
+          <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab"  *ngIf="showTable">
+          <div style=" height: auto;
+          max-height: 525px;
+          overflow-y: auto;
+
+          border-collapse: collapse;
+          ">
             <table class="table table-striped " data-page-length='10'
             style="width:100%;text-align: center;
-                    border: 3px solid rgb(126, 126, 226);;">
+                    border: 3px solid rgb(126, 126, 226);">
               <thead>
                 <tr>
                   <th>SNO.</th>
@@ -50,7 +52,7 @@
               <tbody>
                 <tr *ngFor="let x of this.filterData;let i = index">
                   <td style="color: black;">{{x.sno }}</td>
-                  <td style="color: red;">{{x.totalCases}}</td>
+                  <td style="color: black;">{{x.totalCases}}</td>
                   <td style="color: blue;">{{x.activeCases}}</td>
                   <td style="color: red;">{{x.deaths}}</td>
                   <td style="color: green;">{{x.recovered}}</td>
@@ -60,10 +62,10 @@
               </tbody>
 
             </table>
-
-            <div style="text-align: center;">
+          </div>
+            <div style="text-align: center;" >
               <button type="button" (click)="changePage('previous',this.nRows)" [disabled]="pageNumber==1"
-               style="background-color: cadetblue; color: white;">Previous</button> |
+               style="background-color: cadetblue; color: white;"> < </button> |
               <span>Page Number : {{this.pageNumber}}</span>|
               <span>Number of rows : </span>
 
@@ -72,11 +74,11 @@
               </select>
 
               | <button type="button" (click)="changePage('next',this.nRows)"
-                [disabled]="pageNumber==(this.covidData.length/this.nRows)+(this.covidData.length%this.nRows==0?0:1)"
-                style="background-color: cadetblue; color: white;">Next</button>
-            </div><br>
+                [disabled]="pageNumber==(this.parseInt(this.covidData.length/this.nRows))+(this.covidData.length%this.nRows==0?0:1)"
+                style="background-color: cadetblue; color: white;">></button>
+            </div>
 
-          </div>
+          </div><br>
 
 
 
