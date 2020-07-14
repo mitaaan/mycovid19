@@ -69,7 +69,8 @@
               <span>Page Number : {{this.pageNumber}}</span>|
               <span>Number of rows : </span>
 
-              <select [(ngModel)]="this.nRows" (change)="changePage('changeNumberOfRows',this.nRows)"style="background-color: cadetblue; color: white;">
+              <select [(ngModel)]="this.nRows" (change)="changePage('changeNumberOfRows',this.nRows)"
+                  style="background-color: cadetblue; color: white;">
                 <option *ngFor="let y of numberOfRows" [value]="y">{{y}}</option>
               </select>
 

@@ -14,6 +14,9 @@ import * as moment from "moment";
   templateUrl: './covid-data.component.html',
   styleUrls: ['./covid-data.component.css']
 })
+
+
+
 export class CovidDataComponent implements OnInit {
   showButtons:boolean=true;
   covidType:any=['Global','India'];
@@ -81,22 +84,12 @@ export class CovidDataComponent implements OnInit {
     }
   };
 
-
   chart: any;
-
-
-
-
 
  constructor(private http:HttpClient) {}
 
   ngOnInit() {
-    this.getCovidData();
     this.getData('u');
-  }
-
-  getCovidData() {
-
   }
 
   parseInt(value){
@@ -261,12 +254,12 @@ export class CovidDataComponent implements OnInit {
 
             series[0].data.push(Number(this.covidData[i].totalCases));
 
-            series[3].data.push(Number(this.covidData[i][Object.keys(responseData["data"][i])[0]]["confirmed"]
+            series[1].data.push(Number(this.covidData[i][Object.keys(responseData["data"][i])[0]]["confirmed"]
             -this.covidData[i][Object.keys(responseData["data"][i])[0]]["recovered"]
             -this.covidData[i][Object.keys(responseData["data"][i])[0]]["deaths"]));
 
-            series[1].data.push(Number(this.covidData[i].deaths));
-            series[2].data.push(Number(this.covidData[i].recovered));
+            series[2].data.push(Number(this.covidData[i].deaths));
+            series[3].data.push(Number(this.covidData[i].recovered));
             xCategories1.push(this.covidData[i].lastUpdatedAtApify);
 
             }
