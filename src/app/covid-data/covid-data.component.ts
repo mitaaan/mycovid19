@@ -262,6 +262,8 @@ export class CovidDataComponent implements OnInit {
             series[3].data.push(Number(this.covidData[i].recovered));
             xCategories1.push(this.covidData[i].lastUpdatedAtApify);
 
+
+
             }
 
             this.linechart.series =series;
